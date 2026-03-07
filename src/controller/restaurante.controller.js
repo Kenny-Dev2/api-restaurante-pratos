@@ -45,4 +45,14 @@ class RestauranteController {
       res.status(500).json({ erro: "Erro interno do servidor" });
     }
   }
+
+  async excluirRestaurante(req, res) {
+    try {
+      const { id } = req.params;
+      await Restaurante.findByIdAndDelete(id);
+      res.status(204).send("Restaurante excluído com sucesso");
+    } catch (erro) {
+      res.status(500).json({ erro: "Erro interno do servidor" });
+    }
+  }
 }
