@@ -30,4 +30,19 @@ class RestauranteController {
       res.status(500).json({ erro: "Erro interno do servidor" });
     }
   }
+
+  async atualizarRestaurante(req, res) {
+    try {
+      const { id } = req.params;
+      const { nome, cidade, estado, tipoCozinha, telefone } = req.body;
+      const restauranteAtualizado = await Restaurante.findByIdAndUpdate(
+        id,
+        { nome, cidade, estado, tipoCozinha, telefone },
+        { new: true }
+      );
+      res.status(200).json(restauranteAtualizado);
+    } catch (erro) {
+      res.status(500).json({ erro: "Erro interno do servidor" });
+    }
+  }
 }
