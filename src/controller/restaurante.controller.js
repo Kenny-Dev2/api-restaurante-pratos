@@ -10,6 +10,16 @@ class RestauranteController {
     }
   }
 
+  async obterRestaurantePorId(req, res) {
+    try {
+      const { id } = req. params;
+      const restaurante = await Restaurante.findById(id);
+      res.status(200).json(restaurante);
+    } catch (erro) {
+      res.status(500).json({ erro: "Erro interno do servidor" });
+    }
+  }
+
   async criarRestaurante(req, res) {
     try {
       const { nome, cidade, estado, tipoCozinha, telefone } = req.body;
