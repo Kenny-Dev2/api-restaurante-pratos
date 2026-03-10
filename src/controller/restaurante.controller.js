@@ -12,7 +12,7 @@ class RestauranteController {
 
   async obterRestaurantePorId(req, res) {
     try {
-      const { id } = req. params;
+      const { id } = req.params;
       const restaurante = await Restaurante.findById(id);
       res.status(200).json(restaurante);
     } catch (erro) {
@@ -23,7 +23,13 @@ class RestauranteController {
   async criarRestaurante(req, res) {
     try {
       const { nome, cidade, estado, tipoCozinha, telefone } = req.body;
-      const novoRestaurante = new Restaurante({ nome, cidade, estado, tipoCozinha, telefone });
+      const novoRestaurante = new Restaurante({
+        nome,
+        cidade,
+        estado,
+        tipoCozinha,
+        telefone,
+      });
       const restauranteSalvo = await novoRestaurante.save();
       res.status(201).json(restauranteSalvo);
     } catch (erro) {
@@ -38,7 +44,7 @@ class RestauranteController {
       const restauranteAtualizado = await Restaurante.findByIdAndUpdate(
         id,
         { nome, cidade, estado, tipoCozinha, telefone },
-        { new: true }
+        { new: true },
       );
       res.status(200).json(restauranteAtualizado);
     } catch (erro) {
@@ -56,3 +62,5 @@ class RestauranteController {
     }
   }
 }
+
+export default RestauranteController;
