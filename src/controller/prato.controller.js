@@ -1,7 +1,7 @@
 import Prato from "../model/prato.model.js";
 
 class PratoController {
-  async listarPratos(req, res) {
+  static async listarPratos(req, res) {
     try {
       const pratos = await Prato.find();
       res.status(200).json(pratos);
@@ -10,7 +10,7 @@ class PratoController {
     }
   }
 
-  async obterPratoPorId(req, res) {
+  static async obterPratoPorId(req, res) {
     try {
       const { id } = req.params;
       const prato = await Prato.findById(id);
@@ -20,7 +20,7 @@ class PratoController {
     }
   }
 
-  async criarPrato(req, res) {
+  static async criarPrato(req, res) {
     try {
       const { nome, descricao, preco, categoria, restaurante } = req.body;
       const novoPrato = new Prato({
@@ -37,7 +37,7 @@ class PratoController {
     }
   }
 
-  async atualizarPrato(req, res) {
+  static async atualizarPrato(req, res) {
     try {
       const { id } = req.params;
       const { nome, descricao, preco, categoria, restaurante } = req.body;
@@ -52,7 +52,7 @@ class PratoController {
     }
   }
 
-  async excluirPrato(req, res) {
+  static async excluirPrato(req, res) {
     try {
       const { id } = req.params;
       await Prato.findByIdAndDelete(id);
@@ -62,3 +62,5 @@ class PratoController {
     }
   }
 }
+
+export default PratoController;
