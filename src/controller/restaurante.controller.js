@@ -1,7 +1,7 @@
 import Restaurante from "../model/restaurante.model.js";
 
 class RestauranteController {
-  async listarRestaurantes(req, res) {
+  static async listarRestaurantes(req, res) {
     try {
       const restaurantes = await Restaurante.find();
       res.status(200).json(restaurantes);
@@ -10,7 +10,7 @@ class RestauranteController {
     }
   }
 
-  async obterRestaurantePorId(req, res) {
+  static async obterRestaurantePorId(req, res) {
     try {
       const { id } = req.params;
       const restaurante = await Restaurante.findById(id);
@@ -20,7 +20,7 @@ class RestauranteController {
     }
   }
 
-  async criarRestaurante(req, res) {
+  static async criarRestaurante(req, res) {
     try {
       const { nome, cidade, estado, tipoCozinha, telefone } = req.body;
       const novoRestaurante = new Restaurante({
@@ -37,7 +37,7 @@ class RestauranteController {
     }
   }
 
-  async atualizarRestaurante(req, res) {
+  static async atualizarRestaurante(req, res) {
     try {
       const { id } = req.params;
       const { nome, cidade, estado, tipoCozinha, telefone } = req.body;
@@ -52,7 +52,7 @@ class RestauranteController {
     }
   }
 
-  async excluirRestaurante(req, res) {
+  static async excluirRestaurante(req, res) {
     try {
       const { id } = req.params;
       await Restaurante.findByIdAndDelete(id);
